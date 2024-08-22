@@ -1,9 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: nginx-rollout
+  name: nginx-bluegreen
 spec:
-  replicas: 2
+  replicas: 3
+  strategy:
+    blueGreen:
+      activeService: nginx-service
+      previewService: nginx-preview
+      autoPromotionSeconds: 60
+      scaleDownDelaySeconds: 30
+      # Optional: you can add a rollout analysis or metric provider here
   selector:
     matchLabels:
       app: nginx
@@ -14,14 +21,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.21.4
+        image: nginx:latest
         ports:
         - containerPort: 80
-  strategy:
-    canary:
-      steps:
-      - setWeight: 25
-      - pause: {duration: 30s}
-      - setWeight: 50
-      - pause: {duration: 30s}
-      - setWeight: 100
