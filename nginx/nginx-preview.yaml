@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-preview
 spec:
   selector:
     app: nginx
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 80
