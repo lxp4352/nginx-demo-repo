@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:1.12.2  # 更新镜像版本时修改这里
+          image: nginx:1.12.3  # 更新镜像版本时修改这里
           ports:
             - containerPort: 80
