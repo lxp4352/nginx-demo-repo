@@ -9,7 +9,7 @@ spec:
     blueGreen:
       activeService: nginx-service
       previewService: nginx-preview
-      autoPromotionSeconds: 60  # 自动推广到生产环境的秒数
+      autoPromotionEnabled: false
   selector:
     matchLabels:
       app: nginx
