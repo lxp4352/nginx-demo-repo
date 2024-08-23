@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: nginx-rollout
-  namespace: default
+  namespace: argocd
 spec:
   replicas: 3
   strategy:
