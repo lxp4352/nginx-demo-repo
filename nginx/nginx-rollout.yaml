@@ -1,16 +1,15 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: nginx-bluegreen
+  name: nginx-rollout
+  namespace: default
 spec:
   replicas: 3
   strategy:
     blueGreen:
       activeService: nginx-service
       previewService: nginx-preview
-      autoPromotionSeconds: 60
-      scaleDownDelaySeconds: 30
-      # Optional: you can add a rollout analysis or metric provider here
+      autoPromotionSeconds: 60  # 自动推广到生产环境的秒数
   selector:
     matchLabels:
       app: nginx
@@ -20,7 +19,7 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        ports:
-        - containerPort: 80
+        - name: nginx
+          image: nginx:latest  # 更新镜像版本时修改这里
+          ports:
+            - containerPort: 80
